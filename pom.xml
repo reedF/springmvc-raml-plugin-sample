@@ -87,6 +87,10 @@
 						<!-- verify config -->
 						<!-- raml file path for verify -->
 						<ramlToVerifyPath>${basedir}/${raml-path}</ramlToVerifyPath>
+						<checkForResponseBodySchema>true</checkForResponseBodySchema>
+						<breakBuildOnWarnings>true</breakBuildOnWarnings>
+						<logWarnings>true</logWarnings>
+						<logErrors>true</logErrors>
 						<dependencyPackagesList>
 							<param>${base-package}</param>
 						</dependencyPackagesList>
