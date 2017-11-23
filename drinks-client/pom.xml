@@ -1,76 +1,77 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>  
-  <artifactId>drinks-client</artifactId>  
-  
-  <description>Client implementation offering client side consumption of the endpoints exposed by the server and defined in the RAML document</description>
-  <url>https://github.com/phoenixnap/springmvc-raml-plugin-sample/</url>
-  <name>Drinks Client</name>
-  
-    <parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>drinks-client</artifactId>
+
+	<description>Client implementation offering client side consumption of the endpoints exposed by the server and defined in the RAML document</description>
+	<url>https://github.com/phoenixnap/springmvc-raml-plugin-sample/</url>
+	<name>Drinks Client</name>
+
+	<parent>
 		<groupId>com.phoenixnap.oss</groupId>
 		<artifactId>springmvc-raml-plugin-sample</artifactId>
 		<version>0.0.1</version>
 	</parent>
-	
+
 	<developers>
 		<developer>
 			<name>Kris Galea</name>
 			<email>kristiang@phoenixnap.com</email>
 			<organization>PhoenixNAP</organization>
-      		<organizationUrl>http://www.phoenixnap.com</organizationUrl>
-		</developer>		
+			<organizationUrl>http://www.phoenixnap.com</organizationUrl>
+		</developer>
 	</developers>
-	
+
 	<licenses>
-	  <license>
-		<name>The Apache License, Version 2.0</name>
-		<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-	  </license>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
 	</licenses>
-  
-  <properties>
-	<raml-path>../drinks-server/src/main/resources/public/raml/api.raml</raml-path>	
-	<base-package>com.phoenixnap.oss.sample.client</base-package>
-	<url-field-annotation-path>drinks-server.url</url-field-annotation-path>
-	<feign.client.version>1.1.6.RELEASE</feign.client.version>
-  </properties>
-  
+
+	<properties>
+		<raml-path>../drinks-server/src/main/resources/public/raml/api.raml</raml-path>
+		<base-package>com.phoenixnap.oss.sample.client</base-package>
+		<url-field-annotation-path>drinks-server.url</url-field-annotation-path>
+		<feign.client.version>1.1.6.RELEASE</feign.client.version>
+	</properties>
+
 	<dependencies>
-		
+
 		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-test</artifactId>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>			
+			<artifactId>jackson-databind</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>commons-lang</groupId>
-		    <artifactId>commons-lang</artifactId>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
 			<optional>true</optional>
 		</dependency>
-				
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>			
+			<artifactId>spring-boot-starter-test</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.phoenixnap.oss</groupId>
-			<artifactId>drinks-server</artifactId>		
+			<artifactId>drinks-server</artifactId>
 			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-feign</artifactId>
@@ -83,79 +84,83 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 	</dependencies>
-	
-	
+
+
 	<profiles>
 		<profile>
 			<!-- generates FeignClient as client implementation -->
 			<id>feign-client</id>
 			<build>
 				<plugins>
-         			<plugin>
-         				<groupId>com.phoenixnap.oss</groupId>
+					<plugin>
+						<groupId>com.phoenixnap.oss</groupId>
 						<artifactId>springmvc-raml-plugin</artifactId>
 						<version>${plugin-version}</version>
 						<configuration>
-						    <rule>com.phoenixnap.oss.ramlapisync.generation.rules.SpringFeignClientInterfaceRule</rule>
-						    <!-- we need to 'escape' ${drinks-server.url} -->
-						    <baseUri>$${drinks-server.url}</baseUri>
+							<rule>com.phoenixnap.oss.ramlapisync.generation.rules.SpringFeignClientInterfaceRule</rule>
+							<!-- we need to 'escape' ${drinks-server.url} -->
+							<baseUri>$${drinks-server.url}</baseUri>
 						</configuration>
 						<executions>
 							<execution>
-						    	<id>generate-springmvc-endpoints</id>
+								<id>generate-springmvc-endpoints</id>
 								<phase>generate-sources</phase>
 								<goals>
-						        	<goal>generate-springmvc-endpoints</goal>
-						      </goals>
-						    </execution>
-						  </executions>
-         			</plugin>
-         		</plugins>
+									<goal>generate-springmvc-endpoints</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
 			</build>
 		</profile>
 	</profiles>
-  
+
 	<build>
-		<plugins>		
+		<plugins>
 			<!-- required for adding generated sources -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>				
+				<artifactId>build-helper-maven-plugin</artifactId>
 				<executions>
-					<execution>					        	
+					<execution>
 						<phase>generate-sources</phase>
-						<goals><goal>add-source</goal></goals>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
 						<configuration>
 							<sources>
-								<!-- where to find the generated sources --> 
+								<!-- where to find the generated sources -->
 								<source>${output-relative-path}</source>
 							</sources>
 						</configuration>
 					</execution>
-				</executions>									
+				</executions>
 			</plugin>
-				
+
 			<plugin>
 				<groupId>com.phoenixnap.oss</groupId>
-				<artifactId>springmvc-raml-plugin</artifactId>						
-				<configuration>							
+				<artifactId>springmvc-raml-plugin</artifactId>
+				<configuration>
 					<rule>com.phoenixnap.oss.ramlapisync.generation.rules.Spring4RestTemplateClientRule</rule>
 					<ruleConfiguration>
 						<baseUrlConfigurationPath>${url-field-annotation-path}</baseUrlConfigurationPath>
-					</ruleConfiguration>													
-				</configuration>					
+					</ruleConfiguration>
+				</configuration>
 				<executions>
+					<!-- ignore verify in parent-->
 					<execution>
-					  <id>generate-springmvc-client</id>
-					  <phase>generate-sources</phase>
-					  <goals>
-						<goal>generate-springmvc-endpoints</goal>
-					  </goals>
+						<id>verify-api</id>
+						<phase>none</phase>
 					</execution>
-			  </executions>
+					<execution>
+						<id>generate-springmvc-api-docs</id>
+						<phase>none</phase>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
-	</build>	
+	</build>
 </project>
