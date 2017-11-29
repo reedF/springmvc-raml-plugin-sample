@@ -61,6 +61,11 @@
 			<artifactId>commons-lang</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>com.phoenixnap.oss</groupId>
+			<artifactId>springmvc-raml-annotations</artifactId>
+			<version>0.10.11</version>
+		</dependency>
 	</dependencies>
 
 

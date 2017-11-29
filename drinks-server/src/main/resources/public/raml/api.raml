@@ -14,6 +14,7 @@
           404:
             description: |
               The requested resource on which the modification is being attempted was not found              
+
       delete?:
         responses:          
           404:
@@ -52,21 +53,39 @@
                     ]
                   }
                 }
-  
+ 
     post:
       description: Creates a new drink. 
       body:
         application/json:
           schema: | 
             {
-              "type":"object",
-              "properties":{
-                "type":"object",
+              "$schema": "http://json-schema.org/draft-04/schema#",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type" : "object"
+                },
                 "name": {
                   "type" : "string"
                 }
               }              
             }
+      responses: 
+         "200": 
+            description: Successful Response
+            body: 
+              application/json: 
+                  schema: |
+                    {
+                      "$schema": "http://json-schema.org/draft-04/schema#",
+                      "type" : "object"
+                    }
+                  example: |
+                    {
+                       "test" : "oooo"
+                    }
+
 
     /{drinkName}:    
       uriParameters:
@@ -107,14 +126,27 @@
           application/json:
             schema: |
               { 
-                "type":"object",
-                "properties":{      
-                            
+                "type": "object",
+                "properties": {                                
                   "name": {
                     "type" : "string"
                   }
                 }
               }
+        responses: 
+          "200": 
+            description: Successful Response
+            body: 
+              application/json: 
+                  schema: |
+                    {
+                      "$schema": "http://json-schema.org/draft-04/schema#",
+                      "type" : "object"
+                    }
+                  example: |
+                    {
+                       "test" : "oooo"
+                    }
       delete:
         description: Delete an existing drink. 
   /healthCheck:

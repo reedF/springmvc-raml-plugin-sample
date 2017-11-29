@@ -87,7 +87,9 @@
 						<!-- verify config -->
 						<!-- raml file path for verify -->
 						<ramlToVerifyPath>${basedir}/${raml-path}</ramlToVerifyPath>
+						<checkForSchemaInRequestBody>PUT, POST</checkForSchemaInRequestBody>
 						<checkForResponseBodySchema>true</checkForResponseBodySchema>
+						<checkForSchemaInSuccessfulResponseBody>GET, PUT, POST</checkForSchemaInSuccessfulResponseBody>					
 						<breakBuildOnWarnings>true</breakBuildOnWarnings>
 						<logWarnings>true</logWarnings>
 						<logErrors>true</logErrors>
@@ -97,7 +99,7 @@
 						<!-- end verify config -->
 
 						<!-- mvc to raml config -->
-						<outputRamlFilePath>/${output-relative-path}/api.raml</outputRamlFilePath>
+						<outputRamlFilePath>/${output-relative-path}/test.raml</outputRamlFilePath>
 						<restBasePath>/</restBasePath>
 						<version>0.0.1</version>
 						<!-- <includeGlobalMediaType>false</includeGlobalMediaType> <restrictOnMediaType>false</restrictOnMediaType> -->

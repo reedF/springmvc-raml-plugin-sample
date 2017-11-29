@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.phoenixnap.oss.ramlapisync.annotations.Description;
+import com.phoenixnap.oss.ramlapisync.annotations.Example;
+import com.phoenixnap.oss.ramlapisync.annotations.data.PathDescription;
+
 //@RestController
 public class WelcomeController {
 
@@ -18,8 +22,10 @@ public class WelcomeController {
      * @param str
      * @return
      */
+    @Description(pathDescriptions = { @PathDescription(key="welcome", value="welcome url")})
+    @Example("test case") 
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
-    public ResponseEntity<String> welcome(String str) {
+    public ResponseEntity<String> welcome(@Example("test") String str) {
         return new ResponseEntity<String>(
                 "Welcome:" + str + "==Date:" + DateFormat.getInstance().format(new Date()),
                 HttpStatus.OK);
