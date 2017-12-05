@@ -1,0 +1,28 @@
+#%RAML 1.0 DataType
+#usage: Use this to describe types for api
+schemas:  
+  UpdateDrinkByIdRequest: |
+    {
+      "$ref": "schemas/drink-put.json"
+    }
+  CreateDrinkRequest: | 
+    {
+      "$ref": "schemas/drink-post.json"
+    }
+  GetDrinksResponse: |
+    {
+       "id" : "urn:jsonschema:com:phoenixnap:oss:sample:server:rest:model:GetDrinksResponse",
+       "$schema": "http://json-schema.org/draft-04/schema#",
+       "type": "array",
+       "items": {
+          "$ref": "schemas/drink-get.json"
+        }
+    }
+  GetDrinkByIdResponse: |
+    {
+      "$ref": "schemas/drink-get.json"
+    }               
+  GetHealthCheckResponse: |
+    {
+      "$ref": "schemas/health-get.json"
+    }

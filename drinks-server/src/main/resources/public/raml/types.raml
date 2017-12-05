@@ -1,0 +1,60 @@
+#%RAML 1.0 DataType
+usage: Use this to describe types for api
+types:  
+  GetDrinksResponse:
+    displayName: Drinks response for get by list
+    type: object
+    properties:
+      type:
+        required: true
+        displayName: type
+        type: string
+      name:
+        required: true
+        displayName: name
+        type: string
+  GetDrinkByIdResponse:
+    displayName: Drinks response for get by ID
+    type: object
+    properties:
+      type:
+        required: true
+        displayName: type
+        type: string
+      name:
+        required: true
+        displayName: name
+        type: string
+  UpdateDrinkByIdRequest: 
+    displayName: Drinks request
+    type: object
+    properties:
+      name:
+        required: false
+        displayName: name
+        type: string          
+
+  CreateDrinkRequest:
+    displayName: Drinks request3
+    type: object
+    properties:
+      type:
+        required: false
+        displayName: type
+        type: object
+      name:
+        required: false
+        displayName: name
+        type: string
+  GetHealthCheckResponse:
+    displayName: HealthCheck response
+    type: object
+    properties:
+      timestamp:
+        required: true
+        displayName: timestamp
+        type: string
+      status:
+        required: true
+        displayName: status
+        type: string

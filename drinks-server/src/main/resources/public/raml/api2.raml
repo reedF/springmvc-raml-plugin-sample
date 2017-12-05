@@ -20,21 +20,23 @@
           404:
             description: | 
               The requested resource to delete was not found 
- 
-  title: Drinks Services
-  version: ${project.version}
-  mediaType: application/json
-  baseUri: /
-  /drinks:
-    description: Provides interaction with 'Drink' resource  
-    get:
-      description: Retrieves a list of available drinks.      
-      responses:
-        200:        
-          body: 
-            application/json:
-              schema: |
+  schemas: 
+   - CreateDrinkRequest: | 
+            {
+              "id" : "urn:jsonschema:com:phoenixnap:oss:sample:server:rest:model:CreateDrinkRequest",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type" : "object"
+                },
+                "name": {
+                  "type" : "string"
+                }
+              }              
+            }
+   - GetDrinksResponse: |
                 {
+                  "id" : "urn:jsonschema:com:phoenixnap:oss:sample:server:rest:model:GetDrinksResponse",
                   "$schema": "http://json-schema.org/draft-04/schema#",
                   "type": "array",
                   "items": {
@@ -52,7 +54,65 @@
                       "name"
                     ]
                   }
-                }            
+                }
+   - GetDrinkByIdResponse: |
+                {
+                  "id" : "urn:jsonschema:com:phoenixnap:oss:sample:server:rest:model:GetDrinkByIdResponse",
+                  "$schema": "http://json-schema.org/draft-04/schema#",
+                  "type": "object",
+                  "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                   },
+                    "required": [
+                      "type",
+                      "name"
+                    ]
+                }
+   - UpdateDrinkByIdRequest: |
+              { 
+                "type": "object",
+                "properties": {                                
+                  "name": {
+                    "type" : "string"
+                  }
+                }
+              }
+   - GetHealthCheckResponse: |
+      {
+         "id" : "urn:jsonschema:com:phoenixnap:oss:sample:server:rest:model:GetHealthCheckResponse", 
+         "$schema": "http://json-schema.org/draft-04/schema#",
+         "type": "object",
+         "properties": {
+            "timestamp": {
+               "type": "string"
+            },
+            "status": {
+               "type": "string"
+            }
+          },
+          "required": [
+            "timestamp",
+              "status"
+          ]
+      }       
+  title: Drinks Services
+  version: ${project.version}
+  mediaType: application/json
+  baseUri: /
+  /drinks:
+    description: Provides interaction with 'Drink' resource  
+    get:
+      description: Retrieves a list of available drinks.      
+      responses:
+        200:        
+          body: 
+            application/json:
+              schema:  GetDrinksResponse
               example: |
                 {
                   "result" : "oooo"
@@ -61,34 +121,17 @@
       description: Creates a new drink. 
       body:
         application/json:
-          schema: | 
-            {
-              "id" : "urn:jsonschema:com:phoenixnap:oss:sample:server:rest:model:CreateDrinkRequest",
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type" : "object"
-                },
-                "name": {
-                  "type" : "string"
-                }
-              }              
-            }
+          schema: CreateDrinkRequest
       responses: 
          "200": 
             description: Successful Response
             body: 
               application/json: 
-                  schema: |
-                    {
-                      "$schema": "http://json-schema.org/draft-04/schema#",
-                      "type" : "object"
-                    }
+                  schema: CreateDrinkRequest
                   example: |
                     {
                        "test" : "oooo"
                     }
-
 
     /{drinkName}:    
       uriParameters:
@@ -105,48 +148,19 @@
           200:          
             body:
               application/json:
-                schema: |
-                  {
-                    "id" : "urn:jsonschema:com:phoenixnap:oss:sample:server:rest:model:GetDrinkByIdResponse",
-                    "$schema": "http://json-schema.org/draft-04/schema#",
-                    "type": "object",
-                    "properties": {
-                      "type": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "type",
-                      "name"
-                    ]
-                  }
+                schema: GetDrinkByIdResponse
   
       put:             
         description: Modify an existing drink. 
         body:
           application/json:            
-            schema: |
-              { 
-                "type": "object",
-                "properties": {                                
-                  "name": {
-                    "type" : "string"
-                  }
-                }
-              }
+            schema: UpdateDrinkByIdRequest
         responses: 
           "200": 
             description: Successful Response
             body: 
               application/json: 
-                  schema: |
-                    {
-                      "$schema": "http://json-schema.org/draft-04/schema#",
-                      "type" : "object"
-                    }
+                  schema: CreateDrinkRequest
                   example: |
                     {
                        "test" : "oooo"
@@ -161,31 +175,5 @@
         200:
           body:
             application/json:
-              schema: |
-                {
-                  "$schema": "http://json-schema.org/draft-04/schema#",
-                  "type": "object",
-                  "properties": {
-                    "timestamp": {
-                      "type": "string"
-                    },
-                    "status": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "timestamp",
-                    "status"
-                  ]
-                }
+              schema: GetHealthCheckResponse
      
-            
-      
-              
-
-             
-
-        
-          
- 
- 

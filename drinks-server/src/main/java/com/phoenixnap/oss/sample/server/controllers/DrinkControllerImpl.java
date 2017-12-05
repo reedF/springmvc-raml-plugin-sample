@@ -101,9 +101,9 @@ public class DrinkControllerImpl implements DrinkController{
             getDrinkByIdResponse.setName(drink.getName());
             getDrinkByIdResponse.setType(drink.getDrinkTypeEnum().name());
             LOG.info("Returning from getDrinkById");
-            return new ResponseEntity<GetDrinkByIdResponse> (getDrinkByIdResponse, HttpStatus.OK);
+            return new ResponseEntity(getDrinkByIdResponse, HttpStatus.OK);
         }catch(DrinkNotFoundException e){
-            return new ResponseEntity<GetDrinkByIdResponse> (HttpStatus.NOT_FOUND);
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }            
     }
 
@@ -114,7 +114,7 @@ public class DrinkControllerImpl implements DrinkController{
             LOG.info("Returning from updateDrinkById");
             return new ResponseEntity(HttpStatus.OK);
         }catch(DrinkNotFoundException dex){
-            return new ResponseEntity<GetDrinkByIdResponse> (HttpStatus.NOT_FOUND);
+            return new ResponseEntity (HttpStatus.NOT_FOUND);
         }
         
     }
@@ -126,7 +126,7 @@ public class DrinkControllerImpl implements DrinkController{
             LOG.info("Returning from deleteDrinkById");
             return new ResponseEntity(HttpStatus.ACCEPTED);
         }catch(DrinkNotFoundException dex){
-            return new ResponseEntity<GetDrinkByIdResponse> (HttpStatus.NOT_FOUND);
+            return new ResponseEntity (HttpStatus.NOT_FOUND);
         }
     }
 }

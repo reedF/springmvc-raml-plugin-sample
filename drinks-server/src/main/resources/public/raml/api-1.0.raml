@@ -1,0 +1,101 @@
+#%RAML 1.0
+title: Drinks Services
+version: ${project.version}
+mediaType: application/json
+baseUri: /
+baseUriParameters: {}
+uses: 
+  Domains: types.raml
+  #Domains: schema.raml
+#types:  
+#  UpdateDrinkByIdRequest: !include schemas/drink-put.json
+#  GetDrinksResponse: !include schemas/drink-list.json
+#  GetDrinkByIdResponse: !include schemas/drink-get.json
+#  CreateDrinkRequest: !include schemas/drink-post.json
+#  GetHealthCheckResponse: !include schemas/health-get.json
+    
+/drinks:
+  get:
+    displayName: Drinks
+    description: Retrieves a list of available drinks.
+    responses:
+      200:
+        description: Success
+        body:
+          application/json:
+            displayName: response
+            #type: Domains.GetDrinksResponse
+            type: array
+            items:
+              type: Domains.GetDrinksResponse
+
+  post:
+    displayName: Drinks
+    description: Creates a new drink.
+    body:
+      application/json:
+        displayName: body
+        type: Domains.CreateDrinkRequest
+    responses:
+      200:
+        description: Success
+        body:
+          application/json:
+            example:
+              value:
+                test: oooo
+            displayName: response
+            type: any
+  /{drinkName}:
+    uriParameters:
+      drinkName:
+        required: true
+        displayName: drinkName
+        description: |
+          The name of the drink for info
+
+          required: true
+
+          type: string
+        type: string
+    get:
+      displayName: DrinksByDrinkName
+      description: Retrieves details for a specific drink.
+      responses:
+        200:
+          description: Success
+          body:
+            application/json:
+              displayName: response
+              type: Domains.GetDrinkByIdResponse
+    put:
+      displayName: DrinksByDrinkName
+      description: Modify an existing drink.
+      body:
+        application/json:
+          displayName: body
+          type: Domains.UpdateDrinkByIdRequest
+      responses:
+        200:
+          description: Success
+          body:
+            application/json:
+              example:
+                value:
+                  test: oooo
+              displayName: response
+              type: any
+    delete:
+      displayName: DrinksByDrinkName
+      description: Delete an existing drink.
+/healthCheck:
+  get:
+    displayName: HealthCheck
+    description: Retrieves the server's health status.
+    responses:
+      200:
+        description: Success
+        body:
+          application/json:
+            displayName: response
+            type: Domains.GetHealthCheckResponse

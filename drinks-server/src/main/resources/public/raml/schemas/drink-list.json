@@ -1,0 +1,8 @@
+{
+       "id" : "urn:jsonschema:com:phoenixnap:oss:sample:server:rest:model:GetDrinksResponse",
+       "$schema": "http://json-schema.org/draft-04/schema#",
+       "type": "array",
+       "items": {
+          "$ref": "drink-get.json"
+        }
+}

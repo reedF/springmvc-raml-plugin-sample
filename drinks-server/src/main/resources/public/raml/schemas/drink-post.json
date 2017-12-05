@@ -1,0 +1,12 @@
+            {
+              "id" : "urn:jsonschema:com:phoenixnap:oss:sample:server:rest:model:CreateDrinkRequest",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type" : "object"
+                },
+                "name": {
+                  "type" : "string"
+                }
+              }              
+            } 
