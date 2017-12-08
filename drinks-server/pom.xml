@@ -31,7 +31,7 @@
 	</parent>
 
 	<properties>
-		<raml-path>src/main/resources/public/raml/api.raml</raml-path>
+		<raml-path>src/main/resources/public/raml/api-1.0.raml</raml-path>
 		<base-package>com.phoenixnap.oss.sample.server.rest</base-package>
 	</properties>
 
@@ -65,6 +65,22 @@
 			<groupId>com.phoenixnap.oss</groupId>
 			<artifactId>springmvc-raml-annotations</artifactId>
 			<version>0.10.11</version>
+		</dependency>
+		<dependency>
+			<groupId>guru.nidi.raml</groupId>
+			<artifactId>raml-tester</artifactId>
+			<version>0.9.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -106,6 +122,7 @@
 				<artifactId>springmvc-raml-plugin</artifactId>
 
 				<configuration>
+					<schemaLocation>src/main/resources/public/raml</schemaLocation>
 					<rule>com.phoenixnap.oss.ramlapisync.generation.rules.Spring4ControllerDecoratorRule</rule>
 				</configuration>
 				

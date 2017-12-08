@@ -1,13 +1,18 @@
 #%RAML 1.0
 title: Drinks Services
+description: raml doc
 version: ${project.version}
 mediaType: application/json
-baseUri: /
+documentation: 
+  - title: DOC
+    content: test
+baseUri: http://localhost:8080
 baseUriParameters: {}
 uses: 
   Domains: types.raml
   #Domains: schema.raml
-#types:  
+#types: 
+#  Domains: !include types.raml
 #  UpdateDrinkByIdRequest: !include schemas/drink-put.json
 #  GetDrinksResponse: !include schemas/drink-list.json
 #  GetDrinkByIdResponse: !include schemas/drink-get.json
@@ -15,6 +20,7 @@ uses:
 #  GetHealthCheckResponse: !include schemas/health-get.json
     
 /drinks:
+  description: url for drinks
   get:
     displayName: Drinks
     description: Retrieves a list of available drinks.
@@ -28,7 +34,7 @@ uses:
             type: array
             items:
               type: Domains.GetDrinksResponse
-
+              
   post:
     displayName: Drinks
     description: Creates a new drink.
@@ -36,6 +42,7 @@ uses:
       application/json:
         displayName: body
         type: Domains.CreateDrinkRequest
+        #type: !include schemas/drink-post.json
     responses:
       200:
         description: Success
@@ -47,6 +54,7 @@ uses:
             displayName: response
             type: any
   /{drinkName}:
+    description: url for get detail
     uriParameters:
       drinkName:
         required: true
@@ -68,6 +76,7 @@ uses:
             application/json:
               displayName: response
               type: Domains.GetDrinkByIdResponse
+              #schema: Domains.GetDrinkByIdResponse
     put:
       displayName: DrinksByDrinkName
       description: Modify an existing drink.
@@ -75,6 +84,7 @@ uses:
         application/json:
           displayName: body
           type: Domains.UpdateDrinkByIdRequest
+          #schema: Domains.UpdateDrinkByIdRequest
       responses:
         200:
           description: Success
@@ -88,7 +98,18 @@ uses:
     delete:
       displayName: DrinksByDrinkName
       description: Delete an existing drink.
+      responses:
+        200:
+          description: Success
+          body:
+            application/json:
+              example:
+                value:
+                  test: oooo
+              displayName: response
+              type: any
 /healthCheck:
+  description: url for health
   get:
     displayName: HealthCheck
     description: Retrieves the server's health status.
@@ -99,3 +120,4 @@ uses:
           application/json:
             displayName: response
             type: Domains.GetHealthCheckResponse
+            #schema: Domains.GetHealthCheckResponse
